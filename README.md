@@ -81,6 +81,8 @@ npm install
 docker-compose up -d
 ```
 
+> **Note:** The container automatically imports data from `products.json` into MongoDB on startup.
+
 4. **Run the application in development mode**
 
 ```bash

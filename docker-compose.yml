@@ -7,8 +7,16 @@ services:
       - '27000:27017'
     volumes:
       - mongo_data:/data/db
+      - ./products.json:/products.json:ro
     environment:
       MONGO_INITDB_DATABASE: sneaker_shop
+    command: >
+      bash -c "
+        mongod --fork --logpath /var/log/mongod.log --bind_ip_all &&
+        sleep 5 &&
+        mongoimport --db sneaker_shop --collection products --file /products.json --jsonArray --drop &&
+        tail -f /dev/null
+      "
 
 volumes:
   mongo_data:
